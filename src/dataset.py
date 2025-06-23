@@ -50,6 +50,12 @@ class Synth90kDataset(Dataset):
                 text = mapping[index]
                 paths.append(path)
                 texts.append(text)
+        # # 🔻 Limit number of samples for dev/test
+        # if mode in ['dev', 'test']:
+        #     max_samples = 100  # You can change this to 100 or 500 if you want faster evaluation
+        #     paths = paths[:max_samples]
+        #     texts = texts[:max_samples]
+
         return paths, texts
 
     def __len__(self):

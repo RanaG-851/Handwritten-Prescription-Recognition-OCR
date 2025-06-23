@@ -1,10 +1,10 @@
 """Usage: predict.py [-m MODEL] [-s BS] [-d DECODE] [-b BEAM] [IMAGE ...]
 
 -h, --help    show this
--m MODEL     model file [default: ./checkpoints/crnn_synth90k.pt]
--s BS       batch size [default: 256]
--d DECODE    decode method (greedy, beam_search or prefix_beam_search) [default: beam_search]
--b BEAM   beam size [default: 10]
+-m MODELmodel file [default: ./checkpoints/crnn_synth90k.pt]
+-s BS batch size [default: 256]
+-d DECODEdecode method (greedy, beam_search or prefix_beam_search) [default: beam_search]
+-b BEAMbeam size [default: 10]
 
 """
 from docopt import docopt
@@ -40,6 +40,7 @@ def predict(crnn, dataloader, label2char, decode_method, beam_size):
             pbar.update(1)
         pbar.close()
 
+
     return all_preds
 
 
@@ -57,18 +58,22 @@ def main():
     images = arguments['IMAGE']
     # images = crop(image)
     reload_checkpoint = arguments['-m']
-    batch_size = int(arguments['-s'])
+    batch_size = 1   # default to 1
+    # batch_size = int(arguments['-s'])   # default to 1
     decode_method = arguments['-d']
-    beam_size = int(arguments['-b'])
+    beam_size = 10
+    # beam_size = int(arguments['-b'])
 
     img_height = config['img_height']
     img_width = config['img_width']
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f'device: {device}')
+    print(f'images: {images}')
+    print(f'img_height: {img_height}')
+    print(f'img_width: {img_width}')
 
-    predict_dataset = Synth90kDataset(paths=images,
-                                      img_height=img_height, img_width=img_width)
+    predict_dataset = Synth90kDataset(paths=images,img_height=img_height, img_width=img_width)
 
     predict_loader = DataLoader(
         dataset=predict_dataset,

@@ -1,0 +1,4 @@
+# created by virtualenv automatically
+.venv1/
+__pycache__/
+*.pyc

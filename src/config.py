@@ -7,7 +7,6 @@ common_config = {
     'rnn_hidden': 256,
     'leaky_relu': False,
 }
-
 train_config = {
     'epochs': 10000,
     'train_batch_size': 32,
@@ -18,15 +17,32 @@ train_config = {
     'save_interval': 2000,
     'cpu_workers': 4,
     'reload_checkpoint': None,
-    'valid_max_iter': 100,
+    'valid_max_iter': 10,
     'decode_method': 'greedy',
     'beam_size': 10,
     'checkpoints_dir': 'checkpoints/'
 }
+# train_config = {
+#     'epochs': 1,
+#     'train_batch_size': 8,
+#     'eval_batch_size': 32,
+#     'lr': 0.0005,
+#     'show_interval': 10,
+#     'valid_interval': 50,
+#     'save_interval': 50,
+#     'cpu_workers': 2,
+#     'reload_checkpoint': None,
+#     'valid_max_iter': 10,
+#     'decode_method': 'greedy',
+#     'beam_size': 5,
+#     'checkpoints_dir': 'checkpoints/'
+# }
+
 train_config.update(common_config)
 
 evaluate_config = {
-    'eval_batch_size': 512,
+    # 'eval_batch_size': 512,
+    'eval_batch_size': 256,
     'cpu_workers': 4,
     'reload_checkpoint': 'checkpoints/crnn_synth90k.pt',
     'decode_method': 'beam_search',
