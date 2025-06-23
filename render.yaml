@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: prescription-ocr-api
+    env: python
+    region: oregon
+    buildCommand: ""
+    startCommand: python app.py
+    plan: free
