@@ -1,8 +1,9 @@
 services:
   - type: web
-    name: prescription-ocr-api
+    name: handwritten-prescription-api
     env: python
-    region: oregon
-    buildCommand: ""
-    startCommand: python app.py
     plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python index.py
+    pythonVersion: 3.9.13  # ✅ Add this line!
+    autoDeploy: true
